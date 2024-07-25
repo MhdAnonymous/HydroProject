@@ -42,12 +42,19 @@ This script performs the following tasks:
 Re-extracts the contents of the zip file.
 
 Loads the profile data.
+
 Performs feature engineering by calculating aggregated statistical features (mean, median, std) for each cycle.
+
 Applies feature scaling.
+
 Creates polynomial and interaction features.
+
 Performs a stratified split with 2000 samples for training and the rest for testing.
+
 Defines a parameter grid for SVM.
+
 Performs hyperparameter tuning using GridSearchCV for SVM.
+
 Evaluates the best SVM model on the test set and displays the results.
 
 **RandomForest.py**
@@ -55,11 +62,17 @@ Evaluates the best SVM model on the test set and displays the results.
 This script performs the following tasks:
 
 Re-imports necessary libraries and re-extracts the contents of the zip file.
+
 Loads the profile data.
+
 Performs feature engineering and feature scaling.
+
 Creates polynomial and interaction features.
+
 Splits the data into training and testing sets with 2000 samples for training and the rest for testing.
+
 Trains and evaluates a Random Forest model with the specified training and testing split.
+
 Displays evaluation results for the Random Forest model.
 
 **Overfitting-underfitting.py**
@@ -71,12 +84,19 @@ This script evaluates the Random Forest model on the training set and displays t
 This script performs the following tasks:
 
 Re-imports necessary libraries and re-extracts the contents of the zip file.
+
 Loads the profile data.
+
 Performs feature engineering and feature scaling.
+
 Creates polynomial and interaction features.
+
 Applies feature selection using RFE with Random Forest.
+
 Splits the data into training and testing sets with 2000 samples for training and the rest for testing.
+
 Trains and evaluates a Random Forest model with the selected features and stratified training samples.
+
 Displays evaluation results for the enhanced Random Forest model.
 
 **ML-Models.py**
@@ -84,11 +104,17 @@ Displays evaluation results for the enhanced Random Forest model.
 This script evaluates the performance of different machine learning models (SVM, KNN, Logistic Regression, Decision Tree, AdaBoost) on the dataset:
 
 Re-imports necessary libraries and re-extracts the contents of the zip file.
+
 Loads the profile data.
+
 Performs feature engineering and feature scaling.
+
 Creates polynomial and interaction features.
+
 Splits the data into training and testing sets with 2000 samples for training and the rest for testing.
+
 Defines and evaluates each machine learning model.
+
 Displays evaluation results for each model.
 
 **Requirements**
