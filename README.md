@@ -10,7 +10,7 @@ The project is divided into several sections, each implemented in its own Python
 
 **Overfitting-underfitting.py**: Script for evaluating the Random Forest model on the training set.
 
-**FeatureEngineer.py**: Script for feature selection and further training of the Random Forest model.
+**FeatureEngineer.py**: Script for feature Engineer and further training of the Random Forest model.
 
 **ML-Models.py**: Script for evaluating different machine learning models.
 
