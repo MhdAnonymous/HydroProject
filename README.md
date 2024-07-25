@@ -1,4 +1,4 @@
-This project involves the analysis of hydraulic system data obtained from a hydraulic test rig. The test rig consists of a primary working circuit and a secondary cooling-filtration circuit connected via an oil tank. The system repeatedly performs constant load cycles, measuring various process values such as pressures, volume flows, and temperatures, while the condition of four hydraulic components (cooler, valve, pump, and accumulator) is varied.
+**This project** involves the analysis of hydraulic system data obtained from a hydraulic test rig. The test rig consists of a primary working circuit and a secondary cooling-filtration circuit connected via an oil tank. The system repeatedly performs constant load cycles, measuring various process values such as pressures, volume flows, and temperatures, while the condition of four hydraulic components (cooler, valve, pump, and accumulator) is varied.
 
 **Project Structure**
 
