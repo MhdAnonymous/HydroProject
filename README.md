@@ -1,127 +1,82 @@
-**This project** involves the analysis of hydraulic system data obtained from a hydraulic test rig. The test rig consists of a primary working circuit and a secondary cooling-filtration circuit connected via an oil tank. The system repeatedly performs constant load cycles, measuring various process values such as pressures, volume flows, and temperatures, while the condition of four hydraulic components (cooler, valve, pump, and accumulator) is varied.
+**Data Preparation and Preprocessing**
 
-**Project Structure**
-
-The project is divided into several sections, each implemented in its own Python script:
-
-**data_analysis.py**: Main script for data analysis.
-
-**RandomForest.py**: Script for initial data processing and training of a Random Forest model.
-
-**Overfitting-underfitting.py**: Script for evaluating the Random Forest model on the training set.
-
-**FeatureEngineer.py**: Script for feature Engineer and further training of the Random Forest model.
-
-**ML-Models.py**: Script for evaluating different machine learning models.
-
-**Dataset**
-
-The dataset includes raw process sensor data structured as matrices (tab-delimited), with rows representing the cycles and columns representing data points within a cycle. The sensors involved are:
+**Loading Data:**
 
 
-PS2: Pressure (bar), sampled at 100 Hz
-FS1: Volume flow (l/min), sampled at 10 Hz
-The target condition values are cycle-wise annotated in profile.txt, which includes:
+The code loads three data files: FS1.txt, PS2.txt, and profile.txt. Each file is read into a pandas DataFrame, with profile.txt having custom column names.
+Reducing PS2 Dimensions:
 
-Cooler condition (%)
+To simplify the PS2 dataset, the mean of every 10 consecutive columns is calculated, reducing the number of columns to 600.
+Creating Target Variable:
 
-**Valve condition** (%)
+The target variable (target) is created based on the 'Optimal' column in the profile_df. It is set to 1 if the value is 100 and 0 otherwise.
 
-Internal pump leakage
+**Scaling Data:**
 
-Hydraulic accumulator pressure (bar)
 
-Stable flag
+The FS1 and PS2 data are scaled using MinMaxScaler to normalize the data between 0 and 1.
 
-Scripts Overview
+**Combining Data:**
 
-**data_analysis.py**
 
-This script performs the following tasks:
+The scaled FS1 and PS2 datasets are concatenated horizontally to form a combined dataset for time series modeling.
+Time Series Dataset Creation
 
-Re-extracts the contents of the zip file.
+**Creating Time Series Dataset:**
 
-Loads the profile data.
 
-Performs feature engineering by calculating aggregated statistical features (mean, median, std) for each cycle.
+A function is defined to create a time series dataset. It generates sequences of data points and corresponding targets for a specified number of time steps.
 
-Applies feature scaling.
+**Setting Time Steps and Splitting Data:**
 
-Creates polynomial and interaction features.
 
-Performs a stratified split with 2000 samples for training and the rest for testing.
+The code sets the number of time steps to 10 and splits the dataset into training (first 2000 points) and testing sets (remaining points).
 
-Defines a parameter grid for SVM.
 
-Performs hyperparameter tuning using GridSearchCV for SVM.
+**LSTM Model**
 
-Evaluates the best SVM model on the test set and displays the results.
+Defining LSTM Model:
 
-**RandomForest.py**
+An LSTM model is defined with two LSTM layers followed by two Dense layers. The final Dense layer has a sigmoid activation for binary classification.
+Compiling and Training LSTM Model:
 
-This script performs the following tasks:
+The LSTM model is compiled with the Adam optimizer and binary cross-entropy loss function. It is then trained on the time series training data, with validation on the testing data.
+Saving LSTM Model:
 
-Re-imports necessary libraries and re-extracts the contents of the zip file.
+The trained LSTM model is saved to disk using Keras's model.save() function.
 
-Loads the profile data.
+**Plotting Learning Curves**
 
-Performs feature engineering and feature scaling.
+Plotting Learning Curves:
 
-Creates polynomial and interaction features.
+A function is defined to plot the learning curves of the LSTM model, showing both accuracy and loss for training and validation sets over epochs.
+Evaluating LSTM Model
+Evaluating LSTM Model:
+The LSTM model is evaluated on the testing data, and performance metrics are calculated and printed.
 
-Splits the data into training and testing sets with 2000 samples for training and the rest for testing.
+**Another Models Preparation**
+ 
 
-Trains and evaluates a Random Forest model with the specified training and testing split.
+For models like Logistic Regression, Random Forest, and SVM, the time series data is flattened since these models do not natively handle 3D input.
 
-Displays evaluation results for the Random Forest model.
+**Initializing Models:**
 
-**Overfitting-underfitting.py**
+Three models are initialized: Logistic Regression, Random Forest, and SVM. These models will be trained and evaluated.
 
-This script evaluates the Random Forest model on the training set and displays the training evaluation results.
+**Training and Evaluation**
 
-**FeatureEngineer.py**
+Training and Evaluating Models:
 
-This script performs the following tasks:
+Each model is trained on the flattened training data. Predictions are made on the testing data, and various performance metrics (accuracy, precision, recall, F1 score, and ROC-AUC) are calculated and printed.
 
-Re-imports necessary libraries and re-extracts the contents of the zip file.
+**Saving Models:**
 
-Loads the profile data.
+The trained models are saved to disk using pickle for future use.
 
-Performs feature engineering and feature scaling.
+**Model Comparison**
 
-Creates polynomial and interaction features.
+Comparing Models:
+The performance metrics of all models (Logistic Regression, Random Forest, SVM, and LSTM) are compiled into a DataFrame and printed for comparison.
 
-Applies feature selection using RFE with Random Forest.
 
-Splits the data into training and testing sets with 2000 samples for training and the rest for testing.
-
-Trains and evaluates a Random Forest model with the selected features and stratified training samples.
-
-Displays evaluation results for the enhanced Random Forest model.
-
-**ML-Models.py**
-
-This script evaluates the performance of different machine learning models (SVM, KNN, Logistic Regression, Decision Tree, AdaBoost) on the dataset:
-
-Re-imports necessary libraries and re-extracts the contents of the zip file.
-
-Loads the profile data.
-
-Performs feature engineering and feature scaling.
-
-Creates polynomial and interaction features.
-
-Splits the data into training and testing sets with 2000 samples for training and the rest for testing.
-
-Defines and evaluates each machine learning model.
-
-Displays evaluation results for each model.
-
-**Requirements**
-
-To run the scripts, you will need the following Python libraries:
-
-zipfile
-pandas
-numpy
-sklearn
+The saved models are loaded from disk, and predictions are made on the example testing data point. The predictions from each model are printed to verify they work as expected.
