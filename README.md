@@ -74,9 +74,30 @@ Each model is trained on the flattened training data. Predictions are made on th
 The trained models are saved to disk using pickle for future use.
 
 **Model Comparison**
-
 Comparing Models:
 The performance metrics of all models (Logistic Regression, Random Forest, SVM, and LSTM) are compiled into a DataFrame and printed for comparison.
 
 
 The saved models are loaded from disk, and predictions are made on the example testing data point. The predictions from each model are printed to verify they work as expected.
+
+
+
+
+**Best Model: Random Forest shows the best performance overall, with the highest accuracy, perfect recall, and highest F1 score. It also has an almost perfect ROC-AUC score.**
+
+**LSTM: A close second, showing excellent performance and indicating it effectively captures time series data dependencies.**
+
+**Logistic Regression: A good baseline model with strong performance.**
+
+**SVM: Performs well but not as robust as the other models in this context.**
+
+
+**Conclusion**
+•	For the best overall performance, Random Forest is recommended.
+•	If capturing temporal dependencies is crucial, LSTM is a strong alternative.
+•	Logistic Regression can be used for simpler, more interpretable models with strong performance.
+•	SVM might be less preferred due to its lower precision and F1 score compared to the other models.
+
+
+
+
